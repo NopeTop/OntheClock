@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Start Screen.unity
+    guid: 594e693c00a68604c97e942c93bf3096
+  - enabled: 1
     path: Assets/Scenes/ClockTowerRoom.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/lose.unity
+    guid: bfc113711d50aaa41af90972862ae884
   m_configObjects: {}
