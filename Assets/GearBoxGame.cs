@@ -15,6 +15,8 @@ public class GearBoxGame : MonoBehaviour
     private float yCord2 = -2.65f;
     private Vector3 lastPosition;
     [SerializeField] private GearChecker lastGear;
+    public int score;
+    public GameObject TimeAnomily;
 
     public void Start()
     {
@@ -237,6 +239,8 @@ public class GearBoxGame : MonoBehaviour
                 return false;
             }
         }
+        score++;
+
         return true;
     }
     private float getRadius(GearChecker x)
