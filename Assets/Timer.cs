@@ -13,19 +13,23 @@ public class Timer : MonoBehaviour
     public string Lose;
     public string Win;
     public float totaltime;
+    public bool wincondition;
     public GameObject CardSelection;
     void Update()
     {
-        time -= Time.deltaTime * TimeDialation;
-        totaltime += Time.deltaTime * TimeDialation;
-        ClockTime.value = time;
-        if(time < 0)
+        if (wincondition == false)
         {
-            SceneManager.LoadScene(Lose);
-        }
-        if(totaltime >= 120)
-        {
-            LoadWin();
+            time -= Time.deltaTime * TimeDialation;
+            totaltime += Time.deltaTime * TimeDialation;
+            ClockTime.value = time;
+            if (time < 0)
+            {
+                SceneManager.LoadScene(Lose);
+            }
+            if (totaltime >= 120)
+            {
+                LoadWin();
+            }
         }
     }
 
@@ -39,8 +43,7 @@ public class Timer : MonoBehaviour
 
     public void LoadWin()
     {
-        maxTime = 1000000000000000000;
-        time = maxTime;
+        wincondition = true;
         CardSelection.SetActive(true);
 
     }
