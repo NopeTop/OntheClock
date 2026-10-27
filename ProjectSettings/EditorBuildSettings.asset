@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/lose.unity
     guid: bfc113711d50aaa41af90972862ae884
+  - enabled: 1
+    path: Assets/Scenes/BreakRoom.unity
+    guid: 3c85ee470db8da64d8450d905e35dcb1
   m_configObjects: {}

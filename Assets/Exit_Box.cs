@@ -9,5 +9,6 @@ public class Exit_Box : MonoBehaviour
     private void OnMouseDown()
     {
         Puzzle.SetActive(false);
+        EnablePuzzle.canPuzzle = true;
     }
 }

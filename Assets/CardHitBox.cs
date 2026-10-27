@@ -11,6 +11,6 @@ public class CardHitBox : MonoBehaviour
     private void OnMouseDown()
     {
         collecter.CardChoice(number, cardCollection.MachineCards);
-        SceneManager.LoadScene("BreakRoom");
+        SceneManager.LoadScene("Start Screen");
     }
 }

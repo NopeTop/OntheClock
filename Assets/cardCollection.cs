@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class cardCollection : MonoBehaviour
 {
-    public static List<string> MachineCards = new List<string>();
+    public static List<string> MachineCards = new List<string> {"card1","card2","card3","card4"};
     private List<string> advailableCards;
     private string[] ActuallCards;
     public GameObject[] Hitboxs;
@@ -21,8 +21,8 @@ public class cardCollection : MonoBehaviour
     public void CreateCards(List<string> CardType)
     {
         ActuallCards = new string[3];
-        advailableCards = CardType;
-        for(int i = 0; i < ActuallCards.Length; i++)
+        advailableCards = new List<string>(CardType);
+        for (int i = 0; i < ActuallCards.Length; i++)
         {
             int x = Random.Range(0, advailableCards.Count);
             ActuallCards[i] = advailableCards[x];
@@ -33,7 +33,10 @@ public class cardCollection : MonoBehaviour
     {
         CardType.Remove(ActuallCards[x]);
         CardList.cards.Add(ActuallCards[x]);
-        print(CardList.cards[x]);
+        foreach(string st in CardList.cards)
+        {
+            Debug.Log(st);
+        }
     }
     void Update()
     {
