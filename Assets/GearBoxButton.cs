@@ -31,7 +31,7 @@ public class GearBoxButton : MonoBehaviour
                 Gears.Add(gear);
             }
             index.Clear();
-            timer.addTime();
+            
         }
     }
 }

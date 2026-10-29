@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class TimingPuzzle : MonoBehaviour
 {
+    public SpriteRenderer Enabler;
     public float[] Times;
     public float[] TimeSpeed;
     public float time;
@@ -12,6 +13,7 @@ public class TimingPuzzle : MonoBehaviour
     private bool Back;
     public Slider[] skillTimers;
     public Slider[] skillBars;
+    [SerializeField] public Timer Fix;
     public void Start()
     {
         StartPuzzle();
@@ -32,7 +34,14 @@ public class TimingPuzzle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(this.gameObject.GetComponent<BrokenCheck>().isBorked)
+        {
+            Enabler.color = Color.red;
+        }
+        else
+        {
+            Enabler.color = Color.cyan;
+        }
         if(Back)
         {
             time -= Time.deltaTime * TimeSpeed[CurrentSwitch];
@@ -53,6 +62,8 @@ public class TimingPuzzle : MonoBehaviour
                 if (CurrentSwitch == 3)
                 {
                     StartPuzzle();
+                    this.gameObject.GetComponent<BrokenCheck>().isBorked = false;
+                    Fix.fixMachine(this.gameObject);
                 }
                 else
                     CurrentSwitch++;
