@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GearBoxGame : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class GearBoxGame : MonoBehaviour
     [SerializeField] private GearChecker lastGear;
     public int score;
     public GameObject TimeAnomily;
+    public Text Score;
 
     public void Start()
     {
@@ -240,6 +242,7 @@ public class GearBoxGame : MonoBehaviour
             }
         }
         score++;
+        Score.text = score+"/12";
 
         return true;
     }

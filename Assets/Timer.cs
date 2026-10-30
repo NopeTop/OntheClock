@@ -67,6 +67,10 @@ public class Timer : MonoBehaviour
         }
         TowerStability -= Time.deltaTime * (TimeDialation * amountBroken);
         ClockTime.value = TowerStability;
+        if(TowerStability <= 0 )
+        {
+            SceneManager.LoadScene("lose");
+        }
     }
     public void StartGame()
     {
