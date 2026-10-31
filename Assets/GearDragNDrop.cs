@@ -15,27 +15,37 @@ public class GearDragNDrop : MonoBehaviour
     [SerializeField] private GearChecker GearNode;
     public GameObject gameBox;
     [SerializeField] private GearBoxButton GearBoxButton;
+    private bool isHolding = false;
+    private bool canCreate = true;
     private void Awake()
     {
         GearBoxButton.Gears.Add(this);
     }
     // Update is called once per frame
-    private void OnMouseOver()
+    public void OnMouseDown()
     {
-        if(Input.GetMouseButtonDown(0) && OverNode == false)
+        isHolding = true;
+    }
+    
+    public void Update()
+    {
+        if (isHolding && OverNode == false && canCreate)
         {
-            Instantiate(this.gameObject,this.GearStartPos.position,this.transform.rotation,gameBox.transform);
+            Instantiate(this.gameObject, this.GearStartPos.position, this.transform.rotation, gameBox.transform);
+            canCreate = false;
         }
-        if(Input.GetMouseButton(0))
+        if (isHolding)
         {
-            this.transform.position = cam.ScreenToWorldPoint(new Vector3 (Input.mousePosition.x,Input.mousePosition.y,+11));
+            this.transform.position = cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, +11));
 
         }
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) && isHolding)
         {
-            if(OverNode && GearNode.HasGear == false)
+            isHolding = false;
+            canCreate = true;
+            if (OverNode && GearNode.HasGear == false)
             {
-                this.transform.position = new Vector3(NodePosition.position.x, NodePosition.position.y,-1);
+                this.transform.position = new Vector3(NodePosition.position.x, NodePosition.position.y, -1);
                 onGear = true;
                 GearNode.HasGear = true;
                 GearNode.isRight(this.tag);
@@ -48,9 +58,8 @@ public class GearDragNDrop : MonoBehaviour
             }
 
         }
-       
     }
-   
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "gearNode")

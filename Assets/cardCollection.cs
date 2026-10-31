@@ -9,6 +9,8 @@ public class cardCollection : MonoBehaviour
     private string[] ActuallCards;
     public GameObject[] Hitboxs;
 
+    public GameObject[] Disable;
+
     public void Start()
     {
         
@@ -36,6 +38,13 @@ public class cardCollection : MonoBehaviour
         foreach(string st in CardList.cards)
         {
             Debug.Log(st);
+        }
+    }
+    public void disableMachines()
+    {
+        for(int i = 0; i < Disable.Length;i++)
+        {
+            Disable[i].SetActive(false);
         }
     }
     void Update()

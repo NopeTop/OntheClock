@@ -8,6 +8,7 @@ public class StartGame : MonoBehaviour
     public string scene1;
     public void EnterGame()
     {
+        Debug.Log("x");
         SceneManager.LoadScene(scene1);
     }
 }

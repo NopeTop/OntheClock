@@ -16,7 +16,7 @@ public class Timer : MonoBehaviour
     public string Lose;
     public string Win;
 
-    public static int Gearboxes_solved;
+    [SerializeField] public GearBoxGame GearBox;
     public bool wincondition;
 
     public float timer;
@@ -63,13 +63,18 @@ public class Timer : MonoBehaviour
         }
         if(amountBroken == 0 && TowerStability < maxTime)
         {
-            TowerStability += Time.deltaTime*.2f;
+            TowerStability += Time.deltaTime*.6f;
         }
         TowerStability -= Time.deltaTime * (TimeDialation * amountBroken);
         ClockTime.value = TowerStability;
         if(TowerStability <= 0 )
         {
             SceneManager.LoadScene("lose");
+        }
+        if(GearBox.score == 6)
+        {
+            TimeDialation = 0;
+            LoadWin();
         }
     }
     public void StartGame()
@@ -78,7 +83,7 @@ public class Timer : MonoBehaviour
         is_broken = new bool[Machines.Length];
         for (int i = 0; i < durability.Length; i++)
         {
-            durability[i] = 10;
+            durability[i] = 12;
             is_broken[i] = false;
         }
     }
@@ -99,6 +104,7 @@ public class Timer : MonoBehaviour
     {
         wincondition = true;
         CardSelection.SetActive(true);
+        CardSelection.GetComponent<cardCollection>().disableMachines();
 
     }
 }

@@ -33,5 +33,24 @@ public class GearBoxButton : MonoBehaviour
             index.Clear();
             
         }
+        else
+        {
+            gearBoxGame.StartPuzzle();
+              foreach(GearDragNDrop gear in Gears)
+            {
+                
+                GearDragNDrop x = gear;
+                if (x.wipeGears() != true)
+                    index.Add(gear);
+                
+            }
+            Gears.Clear();
+            
+            foreach (GearDragNDrop gear in index)
+            {
+                Gears.Add(gear);
+            }
+            index.Clear();
+        }
     }
 }

@@ -242,7 +242,7 @@ public class GearBoxGame : MonoBehaviour
             }
         }
         score++;
-        Score.text = score+"/12";
+        Score.text = score+"/6";
 
         return true;
     }
