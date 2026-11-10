@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class cardCollection : MonoBehaviour
 {
-    public static List<string> MachineCards = new List<string> {"card1","card2","card3","card4"};
+    public static List<string> MachineCards = new List<string> {"card1","card2","card3","card4","card5"};
+    public static List<string> ModdifireCards = new List<string> {"DeadLines","ShortFuse","BudgetCuts","BurnOut"};
     private List<string> advailableCards;
     private string[] ActuallCards;
     public GameObject[] Hitboxs;

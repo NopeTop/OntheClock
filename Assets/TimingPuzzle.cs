@@ -45,9 +45,13 @@ public class TimingPuzzle : MonoBehaviour
             time += Time.deltaTime * TimeSpeed[CurrentSwitch];
         }
         skillTimers[CurrentSwitch].value = time;
-        if(time < 0 || time > 4)
+        if(time <= 0)
         {
-            Back = !Back;
+            Back = false;
+        }
+        else if (time >= 4)
+        {
+            Back = true;
         }
         if(Input.GetKeyDown("space"))
         {

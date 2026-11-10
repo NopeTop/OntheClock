@@ -32,6 +32,10 @@ public class Timer : MonoBehaviour
     }
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            TowerStability = 10000000000000;
+        }
         if (wincondition == false)
         {
 
@@ -46,7 +50,7 @@ public class Timer : MonoBehaviour
                         int chanceToBreak = Random.Range(1, durability[i]);
                         if (chanceToBreak == 1)
                         {
-                            durability[i] = 10;
+                            durability[i] = 12;
                             is_broken[i] = true;
                             amountBroken++;
                             Machines[i].GetComponent<BrokenCheck>().isBorked = true;
