@@ -249,10 +249,10 @@ public class GearBoxGame : MonoBehaviour
     private float getRadius(GearChecker x)
     {
         if(x.gearType.Equals("mid"))
-            return (1.5258f);
+            return (1.5258f*1.2f);
         if (x.gearType.Equals("large"))
-            return (2.0736f);
+            return (2.0736f*1.2f);
         else
-            return (9.6f);
+            return (9.6f*1.2f);
     }
 }
