@@ -10,8 +10,10 @@ public class Timer : MonoBehaviour
     public float maxTime = 30f;
     public float TowerStability = 30f;
     public float TimeDialation;
+    public float RecoveryRate;
 
     private int amountBroken;
+    public float machineWeight;
 
     public string Lose;
     public string Win;
@@ -20,7 +22,7 @@ public class Timer : MonoBehaviour
     public bool wincondition;
 
     public float timer;
-    public int difficulty;
+    public float difficulty;
     public int[] durability;
     public GameObject[] Machines;
     public bool[] is_broken;
@@ -29,6 +31,27 @@ public class Timer : MonoBehaviour
     private void Start()
     {
         StartGame();
+        StatUpdate();
+    }
+    public void StatUpdate()
+    {
+        foreach(string x in CardList.cards)
+        {
+            if (x.Equals("Rush Hour"))
+            {
+                TimeDialation *= 1.25f;
+            }
+            else if (x.Equals("Budget Cuts"))
+            {
+                difficulty *= .8f;
+            }
+            else if (x.Equals("Decaf"))
+            {
+                RecoveryRate *= .8f;
+            }
+
+        }
+
     }
     void Update()
     {
@@ -36,10 +59,14 @@ public class Timer : MonoBehaviour
         {
             TowerStability = 10000000000000;
         }
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            LoadWin();
+        }
         if (wincondition == false)
         {
 
-            timer += Time.deltaTime;
+            timer += Time.deltaTime  * TimeDialation;
             if(timer >= difficulty)
             {
                 timer = 0;
@@ -50,7 +77,7 @@ public class Timer : MonoBehaviour
                         int chanceToBreak = Random.Range(1, durability[i]);
                         if (chanceToBreak == 1)
                         {
-                            durability[i] = 12;
+                            durability[i] = 10;
                             is_broken[i] = true;
                             amountBroken++;
                             Machines[i].GetComponent<BrokenCheck>().isBorked = true;
@@ -67,12 +94,13 @@ public class Timer : MonoBehaviour
         }
         if(amountBroken == 0 && TowerStability < maxTime)
         {
-            TowerStability += Time.deltaTime*.6f;
+            TowerStability += Time.deltaTime*RecoveryRate*TimeDialation;
         }
-        TowerStability -= Time.deltaTime * (TimeDialation * amountBroken);
+        TowerStability -= Time.deltaTime * (TimeDialation * (amountBroken/machineWeight));
         ClockTime.value = TowerStability;
         if(TowerStability <= 0 )
         {
+            CardList.cards.Clear();
             SceneManager.LoadScene("lose");
         }
         if(GearBox.score == 6)
@@ -83,6 +111,7 @@ public class Timer : MonoBehaviour
     }
     public void StartGame()
     {
+        TowerStability = maxTime;
         durability = new int[Machines.Length];
         is_broken = new bool[Machines.Length];
         for (int i = 0; i < durability.Length; i++)

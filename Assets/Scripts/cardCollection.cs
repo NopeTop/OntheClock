@@ -5,7 +5,7 @@ using UnityEngine;
 public class cardCollection : MonoBehaviour
 {
     public static List<string> MachineCards = new List<string> {"card1","card2","card3","card4","card5"};
-    public static List<string> ModdifireCards = new List<string> {"Rush Hour","shortFuse","BudgetCuts","BurnOut",""};
+    public static List<string> ModdifireCards = new List<string> {"Rush Hour","shortFuse","Budget Cuts","BurnOut","Decaf"};
 
     private List<string> advailableCards;
     private string[] ActuallCards;
@@ -16,11 +16,17 @@ public class cardCollection : MonoBehaviour
     public void Start()
     {
         
-        CreateCards(MachineCards);
+        CreateCards(ModdifireCards);
+        string debug = "List of cards:";
         foreach (string x in ActuallCards)
         {
-            Debug.Log(x);
+            debug += (" "+x);
         }
+        foreach(GameObject x in Hitboxs)
+        {
+            x.GetComponent<CardHitBox>();
+        }
+        Debug.Log(debug);
     }
     public void CreateCards(List<string> CardType)
     {
@@ -30,17 +36,20 @@ public class cardCollection : MonoBehaviour
         {
             int x = Random.Range(0, advailableCards.Count);
             ActuallCards[i] = advailableCards[x];
+            Hitboxs[i].GetComponent<CardHitBox>().rename();
             advailableCards.RemoveAt(x);
         }
     }
-    public void CardChoice(int x, List<string> CardType)
+    public string CardChoice(int x, List<string> CardType)
     {
         CardType.Remove(ActuallCards[x]);
         CardList.cards.Add(ActuallCards[x]);
-        foreach(string st in CardList.cards)
-        {
-            Debug.Log(st);
-        }
+ 
+        return (ActuallCards[x]);
+    }
+    public string returnName(int x)
+    {
+        return (ActuallCards[x]);
     }
     public void disableMachines()
     {
